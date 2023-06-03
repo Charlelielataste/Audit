@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/20e644323d.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+
+    <title>Audit</title>
+</head>
+
+<body id="pdf">
+
+    <!-- ****************************************HEADER******************************************* -->
+
+    <header class="header">
+
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="">
+                <img id="logo" src="./assets/images/formaction.png" width="112" height="50">
+              </a>
+          
+              <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
+            </div>
+          
+            <div id="navbarBasicExample" class="navbar-menu">
+              <div class="navbar-start">
+                <a class="navbar-item" href="/">
+                  Formulaire
+                </a>
+          
+                <a class="navbar-item" href="/graphique">
+                  Graphiques
+                </a>
+    
+                <a class="navbar-item" href="/etablissement" >
+                    Ajouter un Etablissement
+                </a>
+            </div>
+            </div>
+          </nav>
+
+          <div class="card header__theme-container">
+            <div class="card-content">
+              <div class="content">
+                Objectif : Grille d'Audit pour la Vérification de l'Application Correcte et Efficace des Bonnes Pratiques d'Hygiène et de Sécurité des Aliments
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="card text-align">
+            <div class="card-content">
+              <div class="content">
+                Grille d'Audit  Hygiène et Sécurité des Aliments
+              </div>
+            </div>
+          </div>
+
+          <!-- **********************************************************DATE HEURE ********************************************* -->
+
+          <div class="margin-bottom"></div>
+          <div class="box display-box">
+            <table class="table is-bordered is-hoverable margin-date resize-table-hour">
+                <tbody id="time">
+                    <tr>
+                        <th><strong>Date</strong></th>
+                        <th class="date"></th>
+                    </tr>
+                    <tr>
+                        <th><strong>Heure</strong></th>
+                        <th class="appt"></th>
+                    </tr>
+                    <tr>
+                        <th><strong>Auditeur</strong></th>
+                        <th class="auditeur"></th>
+                    </tr>
+                    <tr>
+                        <th><strong>Établissement Audité</strong></th>
+                        <th id="etablissement" class="etablissement-audit"></th>
+                    </tr>
+                </tbody>
+                </table>
+
+                <button class="button is-info is-rounded is-medium return" id="auditStart">
+                Démarrer Audit
+              </button>
+
+              <button class="button is-danger is-rounded is-medium is-hidden" id="auditreStart">
+                Restart Audit
+              </button>
+          </div>
+
+          <!-- ****************************************************NOTATION************************************************************ -->
+
+          <div class="box text-align">
+            <button class="button is-info is-rounded is-medium return" id="consigne">
+              Afficher les Consignes de Notations
+            </button>
+            <button class="button is-danger is-rounded is-medium is-hidden margin-notation" id="hideconsigne">
+              Cacher les Consignes de Notations
+            </button>
+            <div id="rule" class="is-hidden notation">
+              <div class="bold margin-notation" style="text-decoration: underline; font-size: larger">Notations</div>
+              <div class="margin-notation">Le système de notation couvre plusieurs notations basées sur le niveau de conformité de l’exigence, de la conformité totale à la déviation, 
+                récurrence et/ou non-conformité. Le système de notation est fondé sur le référentiel IFS FOOD. 
+                Il existe cinq possibilités de notation. Des points sont attribués pour chaque exigence selon le tableau suivant :</div>
+              <table class="table is-bordered is-hoverable">
+                  <thead>
+                    <tr>
+                      <th class="blue" style="color: white;"><abbr>Résultat</abbr></th>
+                      <th class="green" style="color: white;"><abbr>Explication</abbr></th>
+                      <th class="purple" style="color: white;"><abbr>Points</abbr></th>
+                    </tr>
+                  </thead>
+                <tbody>
+                  <tr>
+                    <th><abbr>A</abbr></th>
+                    <th><abbr>Conformité totale</abbr></th>
+                    <th><abbr>20 Points</abbr></th>
+                  </tr>
+                  <tr>
+                    <th><abbr>B (point  d’amélioration)</abbr></th>
+                    <th><abbr>Point d’amélioration à apporter</abbr></th>
+                    <th><abbr>10 Points</abbr></th>
+                  </tr>
+                  <tr>
+                    <th><abbr>C ( Non-conformité )</abbr></th>
+                    <th><abbr>L’exigence n’est pas mise en place</abbr></th>
+                    <th><abbr>0 Points</abbr></th>
+                  </tr>
+                  <tr>
+                    <th><abbr>D ( récurrence )</abbr></th>
+                    <th><abbr>La NC est récurrente, aucune Action Corrective en place depuis le dernier audit ou contrôle sanitaire</abbr></th>
+                    <th><abbr>-20 Points</abbr></th>
+                  </tr>
+                  <tr>
+                    <th><abbr>Non-conformité  majeure</abbr></th>
+                    <th><abbr>Non-conformité sur un PNNI du GSA</abbr></th>
+                    <th><abbr>Soustraction de 15 % du  nombre total possible de  points </abbr></th>
+                  </tr>
+                </tbody>
+              </table>
+              <div>Parmi l’ensemble des mesures de maîtrise et de surveillance définies dans le  guide de MEDIREST, certaines règles 
+                sont absolument essentielles et constituent des points  non négociables de l’hygiène dont certains sont qualifiés d’incontournables et  
+                identifiés ci-après par « PNNI ». Ces points sont repris dans la liste des items des  audits hygiène est mis en évidence.
+              </div>
+
+
+            </div>
+          </div>
+
+          <!-- ******************************************************Audit Docu*********************************************** -->
+          
+
+
+        <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "AUDIT DOCUMENTAIRE"
+          </button></th>
+        <div id="auditdocu" class="table-container">
+            <table class="table is-bordered is-hoverable is-fullwidth">
+              <thead>
+                <tr>
+                  <th class="green bold" style="color: white; font-size: large;">AUDIT DOCUMENTAIRE</th>
+                  <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                    Non Audité
+                  </button></th>
+                </tr>
+              </thead>
+              <thead>
+                  <tr>
+                    <th><abbr title=""></abbr></th>
+                  </tr>
+                </thead>
+                <thead>
+                  <tr>
+                    <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                    <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                    <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                    <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                  </tr>
+                </thead>
+              <tbody id="docubody">
+              </tbody>
+            </table>
+
+            <table class="table is-bordered is-hoverable resize-table">
+              <thead>
+                <tr>
+                  <th class="blue" style="color: white;">Score de Section :</th>
+                  <th id="docu" class="score-docu score-allsection recup"></th>
+                  <th>%</th>
+                </tr>
+              </thead>
+            </table>
+        </div>
+        <div id="docuphoto" class="box">
+          <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+            Ajouter Photos
+          </button>
+          <div class="phototarget"></div>
+
+        </div>
+        </div>
+
+
+           <!-- ******************************************************Audit Livraison*********************************************** -->
+
+        <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "LIVRAISON - RÉCEPTION"
+          </button></th>
+        <div id="auditlivraison" class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="blue bold" style="color: white; font-size: large;">LIVRAISON - RÉCEPTION</th>
+                <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                  Non Audité
+                </button></th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                  <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                  <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                  <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                </tr>
+              </thead>
+            <tbody id="livraisonbody">
+              
+            </tbody>
+          </table>
+
+          <table class="table is-bordered is-hoverable resize-table">
+            <thead>
+              <tr>
+                <th class="blue" style="color: white;">Score de Section :</th>
+                <th id="livraison" class="score-livraison score-allsection recup"></th>
+                <th>%</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+      <div id="livraisonphoto" class="box">
+        <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+          Ajouter Photos
+        </button>
+        <div class="phototarget"></div>
+
+      </div>
+      </div>
+
+
+          
+        
+
+         <!-- ******************************************************Stockage Primaire*********************************************** -->
+
+         <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "STOCKAGE PRIMAIRE"
+          </button></th>
+          <div id="auditstockage" class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="orange bold" style="color: white ;font-size: large;">STOCKAGE PRIMAIRE</th>
+                <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                  Non Audité
+                </button></th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                  <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                  <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                  <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                </tr>
+              </thead>
+            <tbody id="stockagebody">
+              
+            </tbody>
+          </table>
+
+          <table class="table is-bordered is-hoverable resize-table">
+            <thead>
+              <tr>
+                <th class="blue" style="color: white;">Score de Section :</th>
+                <th id="stock" class="score-stockage score-allsection recup"></th>
+                <th>%</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+      <div id="stockphoto" class="box">
+        <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+          Ajouter Photos
+        </button>
+        <div class="phototarget"></div>
+
+      </div>
+      </div>
+
+      
+
+        <!-- ******************************************************LÉGUMERIE - DEBOITAGE *********************************************** -->
+
+        <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "LÉGUMERIE - DEBOITAGE"
+          </button></th>
+          <div id="auditlegume" class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="green bold" style="color: white;font-size: large;">LÉGUMERIE - DEBOITAGE</th>
+                <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                  Non Audité
+                </button></th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                  <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                  <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                  <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                </tr>
+              </thead>
+            <tbody id="legumeriebody">
+              
+            </tbody>
+          </table>
+          
+          <table class="table is-bordered is-hoverable resize-table">
+            <thead>
+              <tr>
+                <th class="blue" style="color: white;">Score de Section :</th>
+                <th id="legume" class="score-legume score-allsection recup"></th>
+                <th>%</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+      <div id="legumephoto" class="box">
+        <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+          Ajouter Photos
+        </button>
+        <div class="phototarget"></div>
+
+      </div>
+      </div>
+
+
+        <!-- ******************************************************PRÉPARATIONS FROIDES*********************************************** -->
+
+        <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "PRÉPARATIONS FROIDES"
+          </button></th>
+        <div id="auditprepaf" class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="bleu-soft bold" style="color: white; font-size: large;">PRÉPARATIONS FROIDES</th>
+                <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                  Non Audité
+                </button></th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                  <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                  <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                  <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                </tr>
+              </thead>
+            <tbody id="prepafbody">
+              
+            </tbody>
+          </table>
+          
+          <table class="table is-bordered is-hoverable resize-table">
+            <thead>
+              <tr>
+                <th class="blue" style="color: white;">Score de Section :</th>
+                <th id="prepacold" class="score-prepaf score-allsection recup"></th>
+                <th>%</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+      <div id="prepafphoto" class="box">
+        <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+          Ajouter Photos
+        </button>
+        <div class="phototarget"></div>
+      </div>
+
+
+      </div>
+
+        <!-- ******************************************************PRÉPARATIONS CHAUDES*********************************************** -->
+
+        <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "PRÉPARATIONS CHAUDES"
+          </button></th>
+          <div id="auditprepac" class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="red bold" style="color: white; font-size: large;">PRÉPARATIONS CHAUDES</th>
+                <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                  Non Audité
+                </button></th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                  <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                  <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                  <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                </tr>
+              </thead>
+            <tbody id="prepacbody">
+              
+            </tbody>
+          </table>
+          
+          <table class="table is-bordered is-hoverable resize-table">
+            <thead>
+              <tr>
+                <th class="blue" style="color: white;">Score de Section :</th>
+                <th id="prepahot" class="score-prepac score-allsection recup"></th>
+                <th>%</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+      <div id="prepachophoto" class="box">
+        <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+          Ajouter Photos
+        </button>
+        <div class="phototarget"></div>
+
+      </div>
+      </div>
+
+
+        <!-- ******************************************************PRÉPARATIONS SPÉCIFIQUES*********************************************** -->
+
+        <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "PRÉPARATIONS SPÉCIFIQUES"
+          </button></th>
+          <div id="auditprepaspe" class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="purple bold" style="color: white; font-size: large;">PRÉPARATIONS SPÉCIFIQUES</th>
+                <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                  Non Audité
+                </button></th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                  <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                  <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                  <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                </tr>
+              </thead>
+            <tbody id="prepaspebody">
+              
+            </tbody>
+          </table>
+
+          <table class="table is-bordered is-hoverable resize-table">
+            <thead>
+              <tr>
+                <th class="blue" style="color: white;">Score de Section :</th>
+                <th id="prepaspe" class="score-prepaspe score-allsection recup"></th>
+                <th>%</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+      <div id="prepaspephoto" class="box">
+        <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+          Ajouter Photos
+        </button>
+        <div class="phototarget"></div>
+
+      </div>
+      </div>
+
+
+        <!-- ******************************************************DISTRIBUTION*********************************************** -->
+
+        <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "DISTRIBUTION"
+          </button></th>
+          <div id="auditdistri" class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="yellow bold" style="color: white; font-size: large;">DISTRIBUTION</th>
+                <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                  Non Audité
+                </button></th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                  <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                  <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                  <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                </tr>
+              </thead>
+            <tbody id="distributionbody">
+              
+            </tbody>
+          </table>
+
+          <table class="table is-bordered is-hoverable resize-table">
+            <thead>
+              <tr>
+                <th class="blue" style="color: white;">Score de Section :</th>
+                <th id="distri" class="score-distri score-allsection recup"></th>
+                <th>%</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+      <div id="distriphoto" class="box">
+        <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+          Ajouter Photos
+        </button>
+        <div class="phototarget"></div>
+
+      </div>
+      </div>
+
+
+        <!-- ******************************************************HYGIÈNE DU PERSONNEL*********************************************** -->
+
+        <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "HYGIÈNE DU PERSONNEL"
+          </button></th>
+          <div id="audithperso" class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="orange bold" style="color: white; font-size: large;">HYGIÈNE DU PERSONNEL</th>
+                <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                  Non Audité
+                </button></th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                  <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                  <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                  <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                </tr>
+              </thead>
+            <tbody id="hygienepbody">
+              
+            </tbody>
+          </table>
+          
+          <table class="table is-bordered is-hoverable resize-table">
+            <thead>
+              <tr>
+                <th class="blue" style="color: white;">Score de Section :</th>
+                <th id="hygperso" class="score-hperso score-allsection recup"></th>
+                <th>%</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+      <div id="hygpersophoto" class="box">
+        <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+          Ajouter Photos
+        </button>
+        <div class="phototarget"></div>
+
+      </div>
+      </div>
+
+
+        <!-- ******************************************************HYGIÈNE DES LOCAUX*********************************************** -->
+
+        <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "HYGIÈNE DES LOCAUX"
+          </button></th>
+          <div id="auditlocaux" class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="gray bold" style="color: white; font-size: large;">HYGIÈNE DES LOCAUX</th>
+                <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                  Non Audité
+                </button></th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                  <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                  <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                  <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                </tr>
+              </thead>
+            <tbody id="hygienelbody">
+              
+            </tbody>
+          </table>
+          
+          <table class="table is-bordered is-hoverable resize-table">
+            <thead>
+              <tr>
+                <th class="blue" style="color: white;">Score de Section :</th>
+                <th id="hyglocaux" class="score-locaux score-allsection recup"></th>
+                <th>%</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+      <div id="hyglocauxphoto" class="box">
+        <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+          Ajouter Photos
+        </button>
+        <div class="phototarget"></div>
+
+      </div>
+      </div>
+
+
+        <!-- ******************************************************TRACE TEST Plat cuisiné choisi dans le menu (moins de 5 jours)*********************************************** -->
+
+        <div class="box font-table">
+          <th><button class="button is-info is-rounded is-hidden is-medium button-reaudit" >
+            Audité "TRACE TEST"
+          </button></th>
+          <div id="audittrace" class="table-container">
+          <table class="table is-bordered is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th class="blue bold" style="color: white; font-size: large;">TRACE TEST Plat cuisiné choisi dans le menu (moins de 5 jours)</th>
+                <th><button class="button is-danger is-rounded is-small button-noaudit return">
+                  Non Audité
+                </button></th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Liste</abbr></th>
+                  <th class="gray" style="color: white;"><abbr>Observation</abbr></th>
+                  <th class="bleu-soft" style="color: white;"><abbr>Score</abbr></th>
+                  <th class="yellow" style="color: white;"><abbr>Commentaire/Description</abbr></th>
+                </tr>
+              </thead>
+            <tbody id="tracetestbody"></tbody>
+          </table>
+          
+          <table class="table is-bordered is-hoverable resize-table">
+            <thead>
+              <tr>
+                <th class="blue" style="color: white;">Score de Section :</th>
+                <th id="tracetest" class="score-trace score-allsection recup"></th>
+                <th>%</th>
+              </tr>
+            </thead>
+          </table>
+      </div>
+      <div id="tracephoto" class="box">
+        <button class="fas fa-plus button is-info is-rounded is-small button-photo margin-notation return" >
+          Ajouter Photos
+        </button>
+        <div class="phototarget"></div>
+
+      </div>
+      </div>
+
+
+
+
+
+
+<!-- ***********************************************Commentaire en cas de non conformité************************ -->
+        <div class="margin-bottom"></div>
+        <div id="comment-neg" class="box">
+          <table class="table is-bordered">
+            <thead>
+              <tr>
+                <th class="red bold" style="color: white;">POINT RÈGLEMENTAIRE EN CAS DE NON-CONFORMITÉ</th>
+              </tr>
+            </thead>
+            <thead>
+                <tr>
+                  <th><abbr title=""></abbr></th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <th class="yellow" style="color: white;"><abbr>Items</abbr></th>
+                  <td class="bleu-soft" style="color: white;"><abbr>Section</abbr></td>
+                  <td class="gray" style="color: white;"><abbr>Commentaire</abbr></td>
+                </tr>
+              </thead>
+            <tbody id="badcomment"></tbody>
+          </table>
+        </div>
+
+        <!-- ********************************************************Score Final*********************************************** -->
+
+        <div class="box text-align">
+            <div class="bold margin-notation bleu-soft" style="font-size: larger; color: white; padding: 1.2em;">RÉSULTATS DES AUDITS EN CUISINE</div>
+
+            <div style="color:rgb(3, 148, 3)">Satisfaisant : 90 à 100% de conformité</div>
+            <div class="margin-notation" style="color:red">Insatisfaisant  :  &lt; 90% de conformité</div>
+            
+            <table id="endAudit" class="table is-bordered is-hoverable is-fullwidth">
+                <thead>
+                  <tr>
+                    <th class="blue" style="color: white;"><abbr>% de conformité du mois</abbr></th>
+                    <th class="green" style="color: white;"><abbr>Objectif Cible</abbr></th>
+                    <th class="red" style="color: white;"><abbr>PNNI</abbr></th>
+                    <th class="bleu-soft bold" style="color: white;">Heure de fin :</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th id="score-global">0</th>
+                    <th><abbr>90 %</abbr></th>
+                    <th id="score-pnni" class="pnni-green">0</th>
+                    <th id="endinghour"></th>
+                </tr>
+              </tbody>
+              <tr><td></td></tr>
+              <tfoot>
+                <tr>
+                  <td class="green bold" style="color: white;">Point à Améliorer</td>
+                  <td id="amelioration"><abbr></abbr></td>
+                </tr>
+                <tr>
+                  <td class="purple bold" style="color: white;"><abbr>Conclusions / Resultat</abbr></td>
+                  <td id="commentconculsion"><abbr></abbr></td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <th><button id="final-btn" class="button is-info is-rounded is-medium hidden-element return" style="margin-top: 2.5rem; margin-bottom: 2.5rem;" >
+              Terminer Audit
+            </button></th>
+
+            <th><button id="pdf-btn" class="button is-success is-rounded is-medium is-hidden" style="margin-top: 2.5rem; margin-bottom: 2.5rem;" >
+              Exporter en PDF
+            </button></th>
+
+            <th><button id="pdf-btn-back" class="button is-success is-danger is-medium is-hidden" style="margin-top: 2.5rem; margin-bottom: 2.5rem;" >
+             PDF
+            </button></th>
+            
+          </div>
+    
+
+    
+
+
+
+<!-- ******************************************************Template*************************************** -->
+            <template class="template-question">
+                <tr>
+                    <td class="question-name"><abbr></abbr></td>
+                    <td data-obs-id="A" class="obs"><i class="fas fa-plus" style="color: rgb(3, 148, 3);"></i><abbr></abbr></td>
+                    <td data-score-id="A" class="score counter-score" name="global">0</td>
+                    <td data-comment-id="A" class="comment"></td>
+                    <td data-pnni-id="A" class="pnni-hidden is-hidden"><abbr></abbr></td>
+                </tr>
+            </template>
+
+            <template class="template-comment">
+              <tr class="point-regle">
+                <th class="items"></th>
+                <th class="section"></th>
+                <th class="badcomment"></th>
+                <th><button class="delete"></button></th>
+              </tr>
+            </template>
+
+            <template class="template-photo">
+              <div class="image-container">
+                <button class="delete erase-photo"></button>
+              </div>
+            </template>
+
+
+            
+
+<!-- *********************************************modal*********************************************** -->
+                <div class="modal" id="addQuestionModal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <form action="" method="POST">
+                            <header class="modal-card-head">
+                                <p class="modal-card-title" style="color: black">Ajouter une Observation</p>
+                                <button class="delete close" type="button" aria-label="close"></button>
+                            </header>
+                            <section class="modal-card-body">
+                              <div id="questionhelp" class="bold"></div>
+                                <br>
+                                <div class="field">
+                                    <label class="label">Observations :</label>
+                                    <div class="control">
+                                        <select type="select" class="input" name="name">
+                                          <option>-- Choisissez une Observation --</option>
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <label class="label">Commentaire :</label>
+                                    <div class="control">
+                                      <textarea class="textarea" name="comment" placeholder="Commentaire"></textarea>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="question_id" value="">
+                            </section>
+                            <footer class="modal-card-foot">
+                                <button class="button is-info return">Valider</button>
+                                <button class="button close return" type="button">Annuler</button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+                <div class="modal" id="addTimeModal">
+                  <div class="modal-background"></div>
+                  <div class="modal-card">
+                      <form action="" method="POST">
+                          <header class="modal-card-head">
+                              <p class="modal-card-title" style="color: black">Demarrer Audit</p>
+                              <button class="delete close" type="button" aria-label="close"></button>
+                          </header>
+                          <section class="modal-card-body">
+                                  <br>
+                              <div class="field">
+                                <label class="label">Heure</label>
+                                  <div class="control">
+                                    <input type="time" name="appt" required>
+                                  </div>
+                                  <br>
+
+                                <label class="label">Jour</label>
+                                  <div class="control">
+                                      <input class="input mini-input" type="number" name="day" min="1" max="31" step="1" value="1" required>
+                                  </div>
+                                  <br>
+
+                                <label class="label">Mois</label>
+                                  <div class="control">
+                                      <select type="select" class="input little-input" name="month" required>
+                                          <option>Janvier</option>
+                                          <option>Fevrier</option>
+                                          <option>Mars</option>
+                                          <option>Avril</option>
+                                          <option>Mai</option>
+                                          <option>Juin</option>
+                                          <option>Juillet</option>
+                                          <option>Aout</option>
+                                          <option>Septembre</option>
+                                          <option>Octobre</option>
+                                          <option>Novembre</option>
+                                          <option>Décembre</option>
+                                      </select>
+                                  </div>
+                                  <br>
+          
+                                <label class="label">Année</label>
+                                  <div class="control">
+                                      <input class="input little-input" type="number" name="year" min="2000" max="2080" step="1" value="2022" required>
+                                  </div>
+                                  <br>
+          
+                                <label class="label text-center">Auditeur</label>
+                                  <div class="control">
+                                      <select type="select" class="input text-align" name="auditeur">
+                                          <option>Alain</option>
+                                          <option>Julie</option>
+                                      </select>
+                                  </div>
+                                  <br>
+                                  
+                                  <label class="label text-center">Etablissement Audité</label>
+                                  <div class="control">
+                                      <select type="select" class="etabli input text-align" name="etablissement">
+                                      </select>
+                                  </div>
+                              </div>
+                          </section>
+                          <footer class="modal-card-foot">
+                              <button class="button is-info return">Valider</button>
+                              <button class="button close return" type="button">Annuler</button>
+                          </footer>
+                      </form>
+                  </div>
+              </div>
+
+
+
+
+              <div class="modal " id="endingModal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <form action="" method="POST">
+                            <header class="modal-card-head">
+                                <p class="modal-card-title" style="color: black">Terminer l'Audit</p>
+                                <button class="delete close" type="button" aria-label="close"></button>
+                            </header>
+                            <section class="modal-card-body">
+                                <div class="field">
+                                  <label class="label">Conclusions / Resultat</label>
+                                    <div class="control">
+                                      <textarea class="textarea" name="conclusion" placeholder="Conclusions..."></textarea>
+                                    </div>
+                                      <br>
+                                  <label class="label">Point à Améliorer</label>
+                                    <div class="control">
+                                      <textarea class="textarea" name="pointaameliorer" placeholder="Point à Ameliorer..."></textarea>
+                                    </div>
+                                      <br>
+                                  <label class="label">Heure de Fin</label>
+                                    <div class="control">
+                                      <input type="time" name="appt" required>
+                                    </div>
+                                      <br>
+                                    <label class="label alert" >ATTENTION : Avant de valider, verifiez que tous les champs ont bien été remplis et verifiez bien vos entrées, les
+                                    resultats vont être envoyés en base de données</label>
+                                    <div>
+                                    <label class="label">Mois à Enregister</label>
+                                  <div class="control">
+                                      <select type="select" class="input little-input" name="month" required>
+                                          <option>Janvier</option>
+                                          <option>Fevrier</option>
+                                          <option>Mars</option>
+                                          <option>Avril</option>
+                                          <option>Mai</option>
+                                          <option>Juin</option>
+                                          <option>Juillet</option>
+                                          <option>Aout</option>
+                                          <option>Septembre</option>
+                                          <option>Octobre</option>
+                                          <option>Novembre</option>
+                                          <option>Décembre</option>
+                                      </select>
+                                  </div>
+                                  <br>
+                                  <label class="label">Année à Enregister</label>
+                                  <div class="control">
+                                      <input class="input little-input" type="number" name="year" min="2000" max="2080" step="1" value="2022" required>
+                                  </div>
+                                </div>
+                                </div>
+                            </section>
+                            <footer class="modal-card-foot">
+                                <button class="button is-info return">Valider</button>
+                                <button class="button close return" type="button">Annuler</button>
+                            </footer>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="modal " id="photoModal">
+                  <div class="modal-background"></div>
+                  <div class="modal-card">
+                      <form action="" method="POST">
+                          <header class="modal-card-head">
+                              <p class="modal-card-title" style="color: black">Ajouter une Photo</p>
+                              <button class="delete close" type="button" aria-label="close"></button>
+                          </header>
+                          <section class="modal-card-body">
+                              <div class="field">
+                                  <div class="control">
+                                    <input type="file" name="photo"/>
+                                  </div>
+                              </div>
+                          </section>
+                          <input type="hidden" name="photo_id" value="">
+                          <footer class="modal-card-foot">
+                              <button class="button is-info return">Valider</button>
+                              <button class="button close return" type="button">Annuler</button>
+                          </footer>
+                      </form>
+                  </div>
+              </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+         
+
+    <script src="./assets//js/app.js"></script>
+    <script src="./assets/js/question.js"></script>
+    <script src="./assets/js/tool.js"></script>
+    <script src="./assets/js/time.js"></script>
+    <script src="./assets/js/pdf.js"></script>
+    
+
+</body>
+
+</html>
